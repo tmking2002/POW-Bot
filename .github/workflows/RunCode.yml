@@ -12,7 +12,7 @@ jobs:
     env:
       TWITTER_CONSUMER_API_KEY: ${{ secrets.PCzYaCg3bsE1963cemIArB9BZ }}
       TWITTER_CONSUMER_API_SECRET: ${{ secrets.DofkGisc2fei0deUVTJVeDanKeSoWJ8RB7PYpipGfHQJsFbiYU }}
-      TWITTER_ACCESS_TOKEN: ${{ secrets.1575324050150285312-EnX8GJgDQQCC4PGxpLdx5a7sjxBzfY }}
+      TWITTER_ACCESS_TOKEN: ${{ secrets."1575324050150285312-EnX8GJgDQQCC4PGxpLdx5a7sjxBzfY"}}
       TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.WfVS1F4akxDp1KPHxn5rLluwU5AuA1MnWiqUtZA9GH1pV }}
     steps:
       - uses: actions/checkout@v2
