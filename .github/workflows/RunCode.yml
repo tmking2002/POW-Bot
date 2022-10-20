@@ -1,8 +1,8 @@
-name: POW_PredictorBot
+name: POW-Bot
 
 on:
   schedule:
-    - cron: '04 01 * * *'
+    - cron: '06 01 * * *'
 
 jobs:
   pow-post:
