@@ -2,7 +2,7 @@ name: POW_PredictorBot
 
 on:
   schedule:
-    - cron: '0 02 * * *'
+    - cron: '52 12 * * *'
 
 jobs:
   pow-post:
