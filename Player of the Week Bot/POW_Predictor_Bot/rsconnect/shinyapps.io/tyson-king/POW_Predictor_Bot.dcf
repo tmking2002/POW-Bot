@@ -1,0 +1,11 @@
+name: POW_Predictor_Bot
+title: POW_Predictor_Bot
+username:
+account: tyson-king
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7206760
+bundleId: 6368343
+url: https://tyson-king.shinyapps.io/POW_Predictor_Bot/
+when: 1664901056.72257
+lastSyncTime: 1664901056.72259
