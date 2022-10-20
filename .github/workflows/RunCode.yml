@@ -2,7 +2,7 @@ name: POW-Bot
 
 on:
   schedule:
-    - cron: '20 01 * * *'
+    - cron: '28 05 * * *'
 
 jobs:
   pow-post:
