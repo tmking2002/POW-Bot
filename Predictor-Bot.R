@@ -11,14 +11,14 @@ weeks <- read_csv("2023 Weeks.csv") %>% mutate(weekstart = mdy(weekstart),weeken
 #auth_get()
 #twitter_token <- get_token()
 
-londonmapbot_token <- rtweet::rtweet_bot(
+POWbot_token <- rtweet::rtweet_bot(
   api_key       = Sys.getenv("TWITTER_CONSUMER_API_KEY"),
   api_secret    = Sys.getenv("TWITTER_CONSUMER_API_SECRET"),
   access_token  = Sys.getenv("TWITTER_ACCESS_TOKEN"),
   access_secret = Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 )
 
-source("~/Desktop/Player of the Week Bot/POW_bot_functions.R")
+source("POW_bot_functions.R")
 
 todays_date <- Sys.Date()
 
