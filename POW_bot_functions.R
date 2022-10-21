@@ -3,6 +3,7 @@ install.packages("gtExtras")
 install.packages("hoopR")
 install.packages("janitor")
 install.packages("anytime")
+install.packages("webshot2")
 
 library(tidyverse)
 library(gt)
@@ -10,6 +11,7 @@ library(gtExtras)
 library(hoopR)
 library(janitor)
 library(anytime)
+library(webshot2)
 
 #Read previous data
 #stats_byweek <- read_csv("~/Desktop/Player of the Week Bot/Stats by Week.csv")
