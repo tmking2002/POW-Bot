@@ -191,7 +191,7 @@ predictions_output <- function(df,conf,eow = FALSE,winner = NA){
                  subtitle = "Data from hoopR | Model by @tking0426 @POW_Predictor")
   }
   
-  gtsave(gt,"~/Desktop/Player of the Week Bot/POW Table.png")
+  gtsave(gt,"POW Table.png")
 }
 
 
