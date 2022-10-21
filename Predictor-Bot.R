@@ -1,12 +1,11 @@
+install.packages("lubridate")
+install.packages("rvest")
+install.packages("tidyverse")
+
 library(rtweet)
 library(lubridate)
 library(rvest)
 library(tidyverse)
-
-install.packages("rtweet")
-install.packages("lubridate")
-install.packages("rvest")
-install.packages("tidyverse")
 
 #setwd("~/Desktop/Player of the Week Bot")
 
