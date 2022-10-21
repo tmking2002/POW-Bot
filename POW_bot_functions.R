@@ -25,9 +25,11 @@ all_players <- read_csv("All Players.csv")
 #  mutate(Date = as.Date(anydate(Date)))
 
 #Kinda ugly but gives conference by team
-conferences <- data.frame(team_short_display_name = unique(stats_byweek$team_short_display_name) %>% sort(),
-                          conference = c("East","East","East","East","East","West","West","East","East","East","West","West","East","West","East",
-                                         "West","East","West","East","West","East","East","West","West","West","West","West","West","West","East"))
+#conferences <- data.frame(team_short_display_name = unique(stats_byweek$team_short_display_name) %>% sort(),
+#                          conference = c("East","East","East","East","East","West","West","East","East","East","West","West","East","West","East",
+#                                         "West","East","West","East","West","East","East","West","West","West","West","West","West","West","East"))
+
+conferences <- read_csv("Conferences.csv")
 
 #Creates a model from 2016 season on
 #training <- stats_byweek %>% filter(week_id <= 403 & week_id >= 314)
