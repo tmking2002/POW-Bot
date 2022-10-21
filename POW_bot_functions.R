@@ -1,3 +1,9 @@
+install.packages("gt")
+install.packages("gtExtras")
+install.packages("hoopR")
+install.packages("janitor")
+install.packages("anytime")
+
 library(tidyverse)
 library(gt)
 library(gtExtras)
@@ -6,10 +12,10 @@ library(janitor)
 library(anytime)
 
 #Read previous data
-stats_byweek <- read_csv("~/Desktop/Player of the Week Bot/Stats by Week.csv")
-unique_headshots <- read_csv("~/Desktop/Player of the Week Bot/Unique Headshots.csv")
-pow_weeks <- read_csv("~/Desktop/Player of the Week Bot/POW Weeks.csv")
-all_players <- read_csv("~/Desktop/Player of the Week Bot/All Players.csv")
+#stats_byweek <- read_csv("~/Desktop/Player of the Week Bot/Stats by Week.csv")
+unique_headshots <- read_csv("Unique Headshots.csv")
+#pow_weeks <- read_csv("POW Weeks.csv")
+all_players <- read_csv("All Players.csv")
 
 
 #LOOK AT THIS AFTER FIRST POW ANNOUNCED
@@ -24,11 +30,11 @@ conferences <- data.frame(team_short_display_name = unique(stats_byweek$team_sho
                                          "West","East","West","East","West","East","East","West","West","West","West","West","West","West","East"))
 
 #Creates a model from 2016 season on
-training <- stats_byweek %>% filter(week_id <= 403 & week_id >= 314)
+#training <- stats_byweek %>% filter(week_id <= 403 & week_id >= 314)
 
-#test_model <- stats_byweek %>% filter(week_id <= 440 & week_id > 403)
+#log_model <- glm(pow ~ avg_prop_pts + apg + fg_percent + win_pct,data = training)
 
-log_model <- glm(pow ~ avg_prop_pts + apg + fg_percent + win_pct,data = training)
+log_model <- readRDS("POW Model.rda")
 
 #Function that takes data from hoopR and filters it between a start date and end date
 fetch_games <- function(weekstart,weekend){
