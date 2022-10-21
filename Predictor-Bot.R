@@ -3,6 +3,7 @@ library(lubridate)
 library(rvest)
 library(tidyverse)
 
+#setwd("~/Desktop/Player of the Week Bot")
 
 weeks <- read_csv("2023 Weeks.csv") %>% mutate(weekstart = mdy(weekstart),weekend = mdy(weekend))
 
@@ -32,10 +33,10 @@ for(i in 1:nrow(weeks)){
 send_tweet <- function(weekstart,weekend,conf,eow = FALSE,winner = NA){
   predictions_output(fetch_games(weekstart, weekend), conf, eow, winner)
   
-  #post_tweet(status = paste0(conf,"ern Conference: ",format(as.Date(weekstart),"%b %d, %Y")," through ",format(as.Date(weekend),"%b %d, %Y")),
-  #           media = "POW Table.png",
-  #           media_alt_text = paste0("Table showing the top 5 favorites for the ",conf,"ern Conference player of the week, ",format(as.Date(weekstart),"%b %d, %Y")," through ",format(as.Date(weekend),"%b %d, %Y")),
-  #           token = twitter_token)
+  post_tweet(status = paste0(conf,"ern Conference: ",format(as.Date(weekstart),"%b %d, %Y")," through ",format(as.Date(weekend),"%b %d, %Y")),
+             media = "POW Table.png",
+             media_alt_text = paste0("Table showing the top 5 favorites for the ",conf,"ern Conference player of the week, ",format(as.Date(weekstart),"%b %d, %Y")," through ",format(as.Date(weekend),"%b %d, %Y")),
+             token = twitter_token)
 }
 
 if(todays_date == weekend){eow_selection = TRUE}else{eow_selection = FALSE}
