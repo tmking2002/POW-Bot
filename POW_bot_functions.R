@@ -21,10 +21,10 @@ all_players <- read_csv("All Players.csv")
 
 
 #LOOK AT THIS AFTER FIRST POW ANNOUNCED
-#pow_list <- "https://basketball.realgm.com/nba/awards/by-type/Player-Of-The-Week/30/2023" %>% read_html() %>% html_table() 
-#pow_df <- pow_list[[1]] %>% 
-#  select(Season,Player,Conference,Date) %>% 
-#  mutate(Date = as.Date(anydate(Date)))
+pow_list <- "https://basketball.realgm.com/nba/awards/by-type/Player-Of-The-Week/30/2023" %>% read_html() %>% html_table() 
+pow_df <- pow_list[[13]] %>% 
+  select(Season,Player,Conference,Date) %>% 
+  mutate(Date = as.Date(anydate(Date)))
 
 #Kinda ugly but gives conference by team
 #conferences <- data.frame(team_short_display_name = unique(stats_byweek$team_short_display_name) %>% sort(),
@@ -154,7 +154,8 @@ predictions_output <- function(df,conf,eow = FALSE,winner = NA){
       fmt_percent(columns = c(4,9:11),
                   decimals = 1) %>% 
       gt_img_rows(athlete_headshot_href) %>% 
-      tab_header(title = paste0(conf,"ern Conference: ",format(as.Date(days$weekstart),"%b %d, %Y")," through ",format(as.Date(days$weekend),"%b %d, %Y")))
+      tab_header(title = paste0(conf,"ern Conference: ",format(as.Date(days$weekstart),"%b %d, %Y")," through ",format(as.Date(days$weekend),"%b %d, %Y")),
+                 subtitle = "Data from hoopR | Model by @tking0426 @POW_Predictor")
   }
   else{
     winners = data.frame(athlete_display_name = winner)
