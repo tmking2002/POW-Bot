@@ -23,6 +23,8 @@ POWbot_token <- rtweet::rtweet_bot(
   access_secret = Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 )
 
+rtweet::auth_as(bot)
+
 source("POW_bot_functions.R")
 
 todays_date <- Sys.Date() - 1
@@ -63,10 +65,10 @@ send_tweet <- function(weekstart,weekend,conf,eow = FALSE){
   #Use for actual bot
   token = POWbot_token
   
-  post_tweet(status = status,
-             media = "POW Table.png",
-             media_alt_text = paste0("Table showing the top 5 favorites for the ",conf,"ern Conference player of the week, ",format(as.Date(weekstart),"%b %d, %Y")," through ",format(as.Date(weekend),"%b %d, %Y")),
-             token = token)
+  rtweet::post_tweet(status = status,
+                     media = "POW Table.png",
+                     media_alt_text = paste0("Table showing the top 5 favorites for the ",conf,"ern Conference player of the week, ",format(as.Date(weekstart),"%b %d, %Y")," through ",format(as.Date(weekend),"%b %d, %Y")),
+                     token = token)
 }
 
 send_tweet(weekstart,weekend,"West")
