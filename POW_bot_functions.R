@@ -60,7 +60,7 @@ fetch_games <- function(weekstart,weekend){
   
   team_points <- games %>% 
     group_by(team_short_display_name,game_id,game_date) %>% 
-    summarise(points = sum(as.numeric(pts)))
+    summarise(points = sum(as.numeric(pts),na.rm=T))
   
   
   winners <- team_points %>% 
@@ -87,7 +87,7 @@ fetch_games <- function(weekstart,weekend){
            fga = as.numeric(fga),
            `3pm` = as.numeric(`3pm`),
            `3pa` = as.numeric(`3pa`)) %>% 
-    group_by(athlete_display_name,team_short_display_name,athlete_id,weekstart,weekend) %>% 
+    group_by(athlete_display_name,team_short_display_name,athlete_id,athlete_headshot_href,weekstart,weekend) %>% 
     summarise(games = n(),
               ppg = mean(pts),
               rpg = mean(reb),
@@ -105,7 +105,6 @@ fetch_games <- function(weekstart,weekend){
               `3pa` = sum(`3pa`),
               `3p%` = `3pm` / `3pa`) %>% 
     merge(conferences,by = "team_short_display_name") %>% 
-    merge(unique_headshots,by = "athlete_id") %>% 
     distinct() %>% 
     clean_names()
 }
