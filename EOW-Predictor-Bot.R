@@ -34,9 +34,9 @@ for(i in 1:nrow(weeks)){
   }
 }
 
-send_tweet <- function(weekstart,weekend,conf,eow = FALSE){
+send_tweet <- function(weekstart,weekend,conf,eow){
   
-  winner = pow_df %>% filter(Conference == conf) %>% select(Player) %>%  as.character()
+  winner = pow_df %>% filter(Conference == conf & Date == Sys.Date()) %>% select(Player) %>%  as.character()
   
   predictions_output(fetch_games(weekstart, weekend), conf, eow, winner)
   

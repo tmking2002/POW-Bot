@@ -27,16 +27,16 @@ rtweet::auth_as(POWbot_token)
 
 source("POW_bot_functions.R")
 
-todays_date <- Sys.Date() - 1
-
-for(i in 1:nrow(weeks)){
-  if(todays_date >= weeks$weekstart[i] & todays_date <= weeks$weekend[i]){
-    weekstart <- weeks$weekstart[i]
-    weekend <- weeks$weekend[i]
-  }
-}
-
 send_tweet <- function(weekstart,weekend,conf,eow = FALSE){
+  todays_date <- Sys.Date() - 1
+  
+  for(i in 1:nrow(weeks)){
+    if(todays_date >= weeks$weekstart[i] & todays_date <= weeks$weekend[i]){
+      weekstart <- weeks$weekstart[i]
+      weekend <- weeks$weekend[i]
+      week <- weeks$weeknum[i]
+    }
+  }
   
   winner = pow_df %>% filter(Conference == conf) %>% select(Player) %>%  as.character()
   
@@ -44,19 +44,17 @@ send_tweet <- function(weekstart,weekend,conf,eow = FALSE){
   
   if(wday(Sys.Date()) == 7){
     weekday = "Friday"
-  }
-  else if(wday(Sys.Date()) == 1){
+  } else if(wday(Sys.Date()) == 1){
     weekday = "Saturday"
-  }
-  else{
+  } else{
     weekday = "Test"
   }
 
   if(eow == FALSE){
-    status = paste0(conf,"ern Conference: ",weekday,", ",format(as.Date(Sys.Date()),"%b %d, %Y")," Predictions")
+    status = paste0(conf,"ern Conference: Week ",week, " ",weekday," Predictions")
   }
   else{
-    status = paste0(conf,"ern Conference: ",format(as.Date(weekstart),"%b %d")," through ",format(as.Date(weekend),"%b %d")," Final Predictions")
+    status = paste0(conf,"ern Conference: Week ",week," Final Predictions")
   }
   
   rtweet::post_tweet(status = status,
