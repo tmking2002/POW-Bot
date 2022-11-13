@@ -2,7 +2,7 @@ name: POW_Bot
 
 on:
   schedule:
-    - cron:  '0 17 * * 6-7'
+    - cron:  '0 17 * * 0,6'
 
 jobs:
   pow-post:
