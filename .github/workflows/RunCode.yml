@@ -2,7 +2,7 @@ name: POW-Bot
 
 #on:
 #  schedule:
-#    - cron: '00 12 * * *'
+#    - cron: '0 12 * * 6,7'
 
 on: workflow_dispatch
 
