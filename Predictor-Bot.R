@@ -1,6 +1,12 @@
 install.packages("lubridate")
 install.packages("rvest")
 install.packages("tidyverse")
+install.packages("gt")
+install.packages("gtExtras")
+install.packages("hoopR")
+install.packages("janitor")
+install.packages("anytime")
+install.packages("webshot2")
 
 library(rtweet)
 library(lubridate)
