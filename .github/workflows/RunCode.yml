@@ -1,7 +1,6 @@
 on:
   schedule:
     - cron: '0 17 * * 6-7'
-    worflow_dispatch:
 
 name: POW-Bot
 
