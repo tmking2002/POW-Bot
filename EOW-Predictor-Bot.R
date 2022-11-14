@@ -241,7 +241,7 @@ send_tweet <- function(conf,eow){
   
   winner = pow_df %>% filter(Conference == conf & Date == Sys.Date()) %>% select(Player) %>%  as.character()
   
-  predictions_output(fetch_games(weekstart, weekend), conf) 
+  predictions_output(fetch_games(weekstart, weekend), conf, eow, winner) 
   
   status = paste0(conf,"ern Conference: Final Predictions")
   
