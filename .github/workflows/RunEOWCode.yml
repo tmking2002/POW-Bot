@@ -2,7 +2,7 @@ name: EOW-POW-Bot
 
 on:
   schedule:
-    - cron: '0 21 * * 1'
+    - cron: '0 22 * * 1'
   workflow_dispatch:
 
 
