@@ -42,13 +42,6 @@ unique_headshots <- read_csv("Unique Headshots.csv")
 #pow_weeks <- read_csv("POW Weeks.csv")
 all_players <- read_csv("All Players.csv")
 
-
-#LOOK AT THIS AFTER FIRST POW ANNOUNCED
-pow_list <- "https://basketball.realgm.com/nba/awards/by-type/Player-Of-The-Week/30/2023" %>% read_html() %>% html_table() 
-pow_df <- pow_list[[13]] %>% 
-  select(Season,Player,Conference,Date) %>% 
-  mutate(Date = as.Date(anydate(Date)))
-
 #Kinda ugly but gives conference by team
 #conferences <- data.frame(team_short_display_name = unique(stats_byweek$team_short_display_name) %>% sort(),
 #                          conference = c("East","East","East","East","East","West","West","East","East","East","West","West","East","West","East",
