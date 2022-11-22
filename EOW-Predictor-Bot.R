@@ -24,8 +24,6 @@ library(tidyverse)
 weeks <- read_csv("2023 Weeks.csv") %>% mutate(weekstart = mdy(weekstart),weekend = mdy(weekend))
 
 #auth_as("bot_auth")
-
-#auth_get()
 #twitter_token <- get_token()
 
 POWbot_token <- rtweet::rtweet_bot(
@@ -44,7 +42,7 @@ all_players <- read_csv("All Players.csv")
 
 #LOOK AT THIS AFTER FIRST POW ANNOUNCED
 pow_list <- "https://basketball.realgm.com/nba/awards/by-type/Player-Of-The-Week/30/2023" %>% read_html() %>% html_table() 
-pow_df <- pow_list[[13]] %>% 
+pow_df <- pow_list[[9]] %>% 
   select(Season,Player,Conference,Date) %>% 
   mutate(Date = as.Date(anydate(Date)))
 
@@ -65,29 +63,9 @@ log_model <- readRDS("POW Model.rda")
 #Function that takes data from hoopR and filters it between a start date and end date
 fetch_games <- function(weekstart,weekend){
   #weekstart and weekend are inclusive
-  gameids <- espn_nba_scoreboard(season = format(weekstart,"%Y%m%d")) %>% filter(status_name == "STATUS_FINAL")
   
-  for(i in seq(weekstart+1,weekend,by="days")){
-    day <- as.Date(i,origin="1970-01-01")
-    
-    if(is.null(espn_nba_scoreboard(season = format(day,"%Y%m%d")))){next}
-    
-    temp <- espn_nba_scoreboard(season = format(day,"%Y%m%d")) %>% filter(status_name == "STATUS_FINAL")
-    
-    gameids <- rbind(gameids,temp)
-  }
-  
-  games <- data.frame(matrix(nrow = 0,ncol = 32))
-  names(games) = names(espn_nba_player_box(401360358))
-  
-  for(i in 1:nrow(gameids)){
-    curr <- espn_nba_player_box(gameids$game_id[i]) %>% mutate(game_id = gameids$game_id[i],game_date = gameids$game_date[i])
-    
-    games <- rbind(games,curr)
-  }
-  
-  #games <- load_nba_player_box(season = 2023) %>% 
-  #  filter(game_date >= weekstart & game_date <= weekend)
+  games <- load_nba_player_box(season = 2023) %>% 
+    filter(game_date >= weekstart & game_date <= weekend)
   
   team_points <- games %>% 
     group_by(team_short_display_name,game_id,game_date) %>% 
