@@ -42,7 +42,7 @@ all_players <- read_csv("All Players.csv")
 
 #LOOK AT THIS AFTER FIRST POW ANNOUNCED
 pow_list <- "https://basketball.realgm.com/nba/awards/by-type/Player-Of-The-Week/30/2023" %>% read_html() %>% html_table() 
-pow_df <- pow_list[[9]] %>% 
+pow_df <- pow_list[[length(pow_list)]] %>% 
   select(Season,Player,Conference,Date) %>% 
   mutate(Date = as.Date(anydate(Date)))
 
