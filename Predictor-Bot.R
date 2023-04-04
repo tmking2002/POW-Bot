@@ -65,12 +65,12 @@ fetch_games <- function(weekstart,weekend){
   
   team_points <- games %>% 
     group_by(team_short_display_name,game_id,game_date) %>% 
-    summarise(points = sum(as.numeric(pts),na.rm=T))
+    summarise(team_points = sum(as.numeric(points),na.rm=T))
   
   
   winners <- team_points %>% 
     group_by(game_id) %>% 
-    summarise(winner = team_short_display_name[which(points == max(points))])
+    summarise(winner = team_short_display_name[which(team_points == max(team_points))])
   
   
   averages <- games %>% 
@@ -79,19 +79,17 @@ fetch_games <- function(weekstart,weekend){
     mutate(weekstart = weekstart,
            weekend = weekend,
            won = team_short_display_name == winner,
-           pts = as.numeric(pts),
-           prop_points = pts / points,
-           reb = as.numeric(reb),
-           ast = as.numeric(ast),
-           stl = as.numeric(stl),
-           blk = as.numeric(blk),
-           to = as.numeric(to)) %>%
-    separate(fg, c("fgm","fga")) %>% 
-    separate(fg3, c("3pm","3pa")) %>% 
-    mutate(fgm = as.numeric(fgm),
-           fga = as.numeric(fga),
-           `3pm` = as.numeric(`3pm`),
-           `3pa` = as.numeric(`3pa`)) %>% 
+           pts = as.numeric(points),
+           prop_points = pts / team_points,
+           reb = as.numeric(rebounds),
+           ast = as.numeric(assists),
+           stl = as.numeric(steals),
+           blk = as.numeric(blocks),
+           to = as.numeric(turnovers)) %>%
+    mutate(fgm = as.numeric(field_goals_made),
+           fga = as.numeric(field_goals_attempted),
+           `3pm` = as.numeric(three_point_field_goals_made),
+           `3pa` = as.numeric(three_point_field_goals_attempted)) %>% 
     group_by(athlete_display_name,team_short_display_name,athlete_id,athlete_headshot_href,weekstart,weekend) %>% 
     summarise(games = n(),
               ppg = mean(pts),
